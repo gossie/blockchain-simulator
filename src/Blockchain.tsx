@@ -1,5 +1,5 @@
 import React from 'react';
-import BlockchainModel from './model/blockchain';
+import BlockchainModel from './model/blockchain-model';
 
 interface BlockchainProps {
     blockchain: BlockchainModel;
