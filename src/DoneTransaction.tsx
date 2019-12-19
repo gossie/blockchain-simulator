@@ -5,7 +5,7 @@ interface TransactionProps {
     transaction: TransactionModel;
 }
 
-const Transaction: React.FC<TransactionProps> = (props: TransactionProps) => {
+const DoneTransaction: React.FC<TransactionProps> = (props: TransactionProps) => {
     return(
         <div>
             Transfered {props.transaction.amount} from {props.transaction.from} to {props.transaction.to}.
@@ -13,4 +13,4 @@ const Transaction: React.FC<TransactionProps> = (props: TransactionProps) => {
     );
 }
 
-export default Transaction;
+export default DoneTransaction;

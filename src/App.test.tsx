@@ -1,6 +1,5 @@
 import React from 'react';
 import { render, fireEvent } from '@testing-library/react';
-import { act } from 'react-dom/test-utils';
 import App from './App';
 
 test('that 3 is the default value for the number of miners', () => {
@@ -26,9 +25,3 @@ test('that one is the minimal value for the number of miners', () => {
 
     expect(numberOfMiners.value).toBe('1');
 });
-
-// test('renders learn react link', () => {
-//     const { getByText } = render(<App />);
-//     const linkElement = getByText(/learn react/i);
-//     expect(linkElement).toBeInTheDocument();
-// });

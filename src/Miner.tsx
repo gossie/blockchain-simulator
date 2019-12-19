@@ -7,9 +7,9 @@ interface MinerProps {
 
 const miner: React.FC<MinerProps> = (props: MinerProps) => {
     return (
-        <div>
+        <span>
             Miner
-        </div>
+        </span>
     );
 };
 

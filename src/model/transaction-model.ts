@@ -8,8 +8,8 @@ export default class TransactionModel {
         return this._to;
     }
 
-    public get amount(): string {
-        return this._to;
+    public get amount(): number {
+        return this._amount;
     }
 
     constructor(private _from: string,
