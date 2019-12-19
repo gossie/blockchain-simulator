@@ -26,6 +26,14 @@ test('that transactions are added', (done) => {
     fireEvent.click(add);
 });
 
+test('that amount is greater or equal to 1', () => {
+    const { getByTestId } = render(<TransactionForm transactions={[]} addTransactionCallback={() => {}} />);
+    const amount: HTMLInputElement = (getByTestId('amount') as HTMLInputElement);
+    fireEvent.change(amount, { target: { value: '' } });
+
+    expect(amount.value).toBe('1');
+});
+
 test('that transactions are listed', () => {
     const transactions: Array<TransactionModel> = [
         new TransactionModel('a', 'b', 3),

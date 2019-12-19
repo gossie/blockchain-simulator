@@ -1,43 +1,26 @@
-import React, { useState, ChangeEvent } from 'react';
+import React from 'react';
 import './App.css';
 import Miner from './Miner';
 import TransactionForm from './TransactionForm';
+import Blockchain from './Blockchain';
+import BlockchainModel from './model/blockchain-model';
 import MinerModel from './model/miner-model';
-import TransactionModel from './model/transaction-model';
 
 const App: React.FC = () => {
-    const [numberOfMiners, setNumberOfMiners] = useState(3);
-    const [openTransactions, setOpenTransactions] = useState([]);
-
-    const onNumberOfMinersChange = (event: ChangeEvent<HTMLInputElement>) => {
-        const value: number = parseInt(event.target.value);
-        if (value) {
-            setNumberOfMiners(value);
-        } else {
-            setNumberOfMiners(1);
-        }
-    }
-
-    const miners = [];
-    for (let i=0; i<numberOfMiners; i++) {
-        miners.push(<Miner key={i} miner={new MinerModel()} />);
-    }
-
-    const addTransaction = (from: string, to: string, amount: number) => {
-        setOpenTransactions(openTransactions.concat(new TransactionModel(from, to, amount)));
-    }
-
+    
+    const blockchain: BlockchainModel = new BlockchainModel();
+    const miner: MinerModel = new MinerModel(blockchain);    
+    
     return (
         <div className="App">
             <div>
-                <label>Anzahl der Miner</label>
-                <input data-testid="numberOfMiners" value={numberOfMiners} onChange={onNumberOfMinersChange} />
+                <TransactionForm blockchain={blockchain} />
             </div>
             <div>
-                {miners}
+                <Miner miner={miner} />
             </div>
             <div>
-                <TransactionForm addTransactionCallback={addTransaction} transactions={openTransactions} />
+                <Blockchain blockchain={blockchain} />
             </div>
         </div>
     );

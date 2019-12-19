@@ -1,34 +1,52 @@
-import React, { useState } from 'react';
-import TransactionModel from './model/transaction-model';
+import React, { useState, ChangeEvent, useEffect } from 'react';
 import OpenTransaction from './OpenTransaction';
+import BlockchainModel from './model/blockchain-model';
+import TransactionModel from './model/transaction-model';
+import { Subscription } from 'rxjs';
 
 interface TransactionFormProps {
-    transactions: Array<TransactionModel>
-    addTransactionCallback: (from: string, to: string, amount: number ) => void;
+    blockchain: BlockchainModel
 }
 
 const TransactionForm: React.FC<TransactionFormProps> = (props: TransactionFormProps) => {
     const [from, setFrom] = useState('');
     const [to, setTo] = useState('');
-    const [amount, setAmount] = useState(0);
+    const [amount, setAmount] = useState(1);
+    const [openTransactions, setOpenTransactions] = useState([]);
 
-    const addTransaction = () => {
-        props.addTransactionCallback(from, to, amount);
+    const onAmountChange = (event: ChangeEvent<HTMLInputElement>) => {
+        const value: number = parseInt(event.target.value);
+        if (value) {
+            setAmount(value);
+        } else {
+            setAmount(1);
+        }
     }
 
-    const openTransactions = props.transactions
+    const addTransaction = () => {
+        const newTransaction = new TransactionModel(from, to, amount);
+        props.blockchain.addOpenTransaction(newTransaction);
+        setOpenTransactions(t => [...t, newTransaction]);
+    };
+
+    useEffect(() => {
+        const subscription: Subscription = props.blockchain.observeNewBlock().subscribe(() => setOpenTransactions([]));
+        return () => subscription.unsubscribe();
+    }, [props.blockchain]);
+
+    const transactions = openTransactions
         .map((transaction: TransactionModel, index: number) => <OpenTransaction key={index} transaction={transaction} />);
 
     return (
         <div>
             <div>
                 <h2>New transaction</h2>
-                Transfer <input data-testid="amount" value={amount} onChange={event => setAmount(parseInt(event.target.value))} /> 
+                Transfer <input data-testid="amount" value={amount} onChange={onAmountChange} /> 
                 from <input data-testid="from" value={from} onChange={event => setFrom(event.target.value)} /> 
                 to <input data-testid="to" value={to} onChange={event => setTo(event.target.value)} />
                 <button data-testid="add" onClick={addTransaction}>Add</button>
             </div>
-            {openTransactions}
+            {transactions}
         </div>
     );
 };

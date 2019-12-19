@@ -1,16 +1,23 @@
-import React from 'react';
+import React, { useEffect, useState } from 'react';
 import MinerModel from './model/miner-model';
+import { Subscription } from 'rxjs';
 
 interface MinerProps {
-    miner: MinerModel
+    miner: MinerModel;
 }
 
-const miner: React.FC<MinerProps> = (props: MinerProps) => {
+const Miner: React.FC<MinerProps> = (props: MinerProps) => {
+    const [proofOfWork, setProofOfWork] = useState('');
+    useEffect(() => {
+        const subscription: Subscription = props.miner.observeProofOfWorkSearch().subscribe((current: string) => setProofOfWork(current));
+        return () => subscription.unsubscribe();
+    });
+
     return (
         <span>
-            Miner
+            I am mining! {proofOfWork}
         </span>
     );
 };
 
-export default miner;
+export default Miner;
