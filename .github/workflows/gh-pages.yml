@@ -1,0 +1,27 @@
+name: gh-pages
+
+on:
+  push:
+    branches:
+      - master
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v1
+      - uses: actions/setup-node@v1
+        with:
+          node-version: 12
+      - run: npm ci
+      - run: npm run test:ci
+
+  deploy-ghp:
+    needs: build
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v1
+      - uses: JamesIves/github-pages-deploy-action@releases/v3
+        with:
+          GITHUB_TOKEN: ${{ secrets.BLOCKCHAIN_SIMULATOR_GITHUB_TOKEN }}
+          BRANCH: gh-pages
+          FOLDER: build
