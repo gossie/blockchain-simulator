@@ -24,7 +24,7 @@ const App: React.FC = () => {
                 </div>
                 <div className="tile is-parent">
                     <div className="tile is-child box">
-                        Participants
+                        
                     </div>
                     <div className="tile is-child box">
                         <Blockchain blockchain={blockchain} />
