@@ -6,7 +6,6 @@ on:
       - master
 jobs:
   build-and-deploy-ghp:
-    needs: build
     runs-on: ubuntu-latest
     steps:
       - name: Checkout
