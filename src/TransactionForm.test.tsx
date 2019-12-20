@@ -2,16 +2,12 @@ import React from 'react';
 import { render, fireEvent } from '@testing-library/react';
 import TransactionForm from './TransactionForm';
 import TransactionModel from './model/transaction-model';
+import BlockchainModel from './model/blockchain-model';
 
-test('that transactions are added', (done) => {
-    const addCallback = (from: string, to: string, amount: number) => {
-        expect(from).toEqual('a');
-        expect(to).toEqual('b');
-        expect(amount).toEqual(3);
-        done();
-    }
+test('that transactions are added', () => {
+    const blockchain = new BlockchainModel();
 
-    const { getByTestId } = render(<TransactionForm transactions={[]} addTransactionCallback={addCallback} />);
+    const { getByTestId } = render(<TransactionForm blockchain={blockchain} />);
 
     const amount: HTMLInputElement = (getByTestId('amount') as HTMLInputElement);
     fireEvent.change(amount, { target: { value: '3' } });
@@ -24,10 +20,16 @@ test('that transactions are added', (done) => {
     
     const add: HTMLButtonElement = (getByTestId('add') as HTMLButtonElement);
     fireEvent.click(add);
+
+    expect(blockchain.openTransactions).toEqual([
+        new TransactionModel('a', 'b', 3)
+    ]);
 });
 
 test('that amount is greater or equal to 1', () => {
-    const { getByTestId } = render(<TransactionForm transactions={[]} addTransactionCallback={() => {}} />);
+    const blockchain = new BlockchainModel();
+
+    const { getByTestId } = render(<TransactionForm blockchain={blockchain} />);
     const amount: HTMLInputElement = (getByTestId('amount') as HTMLInputElement);
     fireEvent.change(amount, { target: { value: '' } });
 
@@ -35,11 +37,10 @@ test('that amount is greater or equal to 1', () => {
 });
 
 test('that transactions are listed', () => {
-    const transactions: Array<TransactionModel> = [
-        new TransactionModel('a', 'b', 3),
-        new TransactionModel('c', 'b', 5)
-    ];
+    const blockchain = new BlockchainModel();
+    blockchain.addOpenTransaction(new TransactionModel('a', 'b', 3));
+    blockchain.addOpenTransaction(new TransactionModel('c', 'b', 5));
 
-    const {} = render(<TransactionForm transactions={transactions} addTransactionCallback={() => {}} />);
+    const {} = render(<TransactionForm blockchain={blockchain} />);
 });
 

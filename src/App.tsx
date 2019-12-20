@@ -12,15 +12,24 @@ const App: React.FC = () => {
     const miner: MinerModel = new MinerModel(blockchain);    
     
     return (
-        <div className="App">
-            <div>
-                <TransactionForm blockchain={blockchain} />
-            </div>
-            <div>
-                <Miner miner={miner} />
-            </div>
-            <div>
-                <Blockchain blockchain={blockchain} />
+        <div className="tile is-ancestor">
+            <div className="tile is-vertical">
+                <div className="tile is-parent">
+                    <div className="tile is-child box">
+                        <TransactionForm blockchain={blockchain} />
+                    </div>
+                    <div className="tile is-child box">
+                        <Miner miner={miner} />
+                    </div>
+                </div>
+                <div className="tile is-parent">
+                    <div className="tile is-child box">
+                        Participants
+                    </div>
+                    <div className="tile is-child box">
+                        <Blockchain blockchain={blockchain} />
+                    </div>
+                </div>
             </div>
         </div>
     );

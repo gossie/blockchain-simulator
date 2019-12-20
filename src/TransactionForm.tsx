@@ -41,10 +41,10 @@ const TransactionForm: React.FC<TransactionFormProps> = (props: TransactionFormP
         <div>
             <div>
                 <h2>New transaction</h2>
-                Transfer <input data-testid="amount" value={amount} onChange={onAmountChange} /> 
-                from <input data-testid="from" value={from} onChange={event => setFrom(event.target.value)} /> 
-                to <input data-testid="to" value={to} onChange={event => setTo(event.target.value)} />
-                <button data-testid="add" onClick={addTransaction}>Add</button>
+                Transfer <input data-testid="amount" className="input" type="text" value={amount} onChange={onAmountChange} /> 
+                from <input data-testid="from" className="input" type="text" value={from} onChange={event => setFrom(event.target.value)} /> 
+                to <input data-testid="to" className="input" type="text" value={to} onChange={event => setTo(event.target.value)} />
+                <button data-testid="add" className="button is-link" onClick={addTransaction}>Add</button>
             </div>
             {transactions}
         </div>

@@ -13,7 +13,7 @@ const Block: React.FC<BlockProps> = (props: BlockProps) => {
         .map((transaction: TransactionModel) => `${transaction.amount} from ${transaction.from} to ${transaction.to}`)
         .join(', ');
     return (
-        <div className="block">
+        <div className="block box">
             Transactions: {transactions}<br />
             Previous hash: {props.block.previousHash}<br />
             Hash: {props.block.hash}<br />

@@ -36,6 +36,7 @@ export default class BlockchainModel {
 
     public addBlock(proofOfWork: number): void {
         const newBlock = new BlockModel(this._openTransactions, this.top.hash, proofOfWork);
+        // TODO: check the blockchain
         this._blocks.push(newBlock);
         this._openTransactions = [];
         this._blockSubject.next(newBlock);
