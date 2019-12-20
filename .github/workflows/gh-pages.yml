@@ -5,23 +5,19 @@ on:
     branches:
       - master
 jobs:
-  build:
-    runs-on: ubuntu-latest
-    steps:
-      - uses: actions/checkout@v1
-      - uses: actions/setup-node@v1
-        with:
-          node-version: 12
-      - run: npm ci
-      - run: npm run test:ci
-      - run: npm run build
-
-  deploy-ghp:
+  build-and-deploy-ghp:
     needs: build
     runs-on: ubuntu-latest
     steps:
-      - uses: actions/checkout@v1
-      - uses: JamesIves/github-pages-deploy-action@releases/v3
+      - name: Checkout
+        uses: actions/checkout@v1
+      - name: Build
+        run: |
+          npm ci
+          npm run test:ci
+          npm run build
+      - name: Deploy
+        uses: JamesIves/github-pages-deploy-action@releases/v3
         with:
           GITHUB_TOKEN: ${{ secrets.BLOCKCHAIN_SIMULATOR_GITHUB_TOKEN }}
           BRANCH: gh-pages
