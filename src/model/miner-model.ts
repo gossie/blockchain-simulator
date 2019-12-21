@@ -9,19 +9,26 @@ export default class MinerModel {
     private static readonly MINING_TIMEOUT = 50;
 
     private _proofOfWorkSubject: Subject<string> = new Subject();
-    private _subscriptions: Array<Subscription> = [];
+    private _miningSubscription: Subscription | undefined = undefined;
+    private _blockSubscription: Subscription;
     private _top: BlockModel;
     private _proofOfWork = 0;
 
     constructor(private  _blockchain: BlockchainModel) {
         this._top = _blockchain.top;
-        this._subscriptions.push(_blockchain.observeNewBlock()
+        this._blockSubscription = _blockchain.observeNewBlock()
             .subscribe((block: BlockModel) => {
                 this._top = block;
                 this._proofOfWork = 0;
-            }));
+            });
+    }
 
-        this._subscriptions.push(interval(MinerModel.MINING_TIMEOUT)
+    public observeProofOfWorkSearch(): Observable<string> {
+        return this._proofOfWorkSubject.asObservable();
+    }
+
+    public startMining(): void {
+        this._miningSubscription = interval(MinerModel.MINING_TIMEOUT)
             .pipe(
                 delayWhen(() => {
                     if (this._proofOfWork === 0) {
@@ -31,11 +38,11 @@ export default class MinerModel {
                     }
                 })
             )
-            .subscribe(() => this.mine()));
+            .subscribe(() => this.mine());
     }
 
-    public observeProofOfWorkSearch(): Observable<string> {
-        return this._proofOfWorkSubject.asObservable();
+    public pauseMining(): void {
+        this._miningSubscription?.unsubscribe();
     }
 
     private mine(): void {

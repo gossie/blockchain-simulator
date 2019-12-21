@@ -8,6 +8,7 @@ import { createHash } from 'crypto';
 export default class BlockchainModel {
 
     public static readonly PROOF_OF_WORK_CONSTRAINT = '00';
+    private static readonly MAX_BLOCK_SIZE = 5;
 
     private _blockSubject: Subject<BlockModel>;
     private _blocks: Array<BlockModel> = [];
@@ -41,7 +42,7 @@ export default class BlockchainModel {
 
     public addBlock(proofOfWork: number): void {
         console.debug('blockchain received a new proof of work', proofOfWork);
-        const newBlock = new BlockModel(this._openTransactions.splice(0, 10), this.top.hash, proofOfWork);
+        const newBlock = new BlockModel(this._openTransactions.splice(0, BlockchainModel.MAX_BLOCK_SIZE), this.top.hash, proofOfWork);
         console.debug('blockchain created a new block', newBlock);
         this._blocks.push(newBlock);
 
