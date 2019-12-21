@@ -14,7 +14,7 @@ export default class BlockchainModel {
     private _openTransactions: Array<TransactionModel> = [];
 
     constructor() {
-        const genesis: BlockModel = new BlockModel([], '', 123);
+        const genesis = new BlockModel([], '', 123);
         this._blocks.push(genesis);
         this._blockSubject = new BehaviorSubject(genesis);
     }
@@ -67,11 +67,9 @@ export default class BlockchainModel {
     }
 }
 
-
 interface BiFunction<A, B, C> {
     (a: A, b: B): C;
 };
-
 
 class EveryReduceOperator extends TerminalOperator<BlockModel, boolean> {
 
@@ -104,7 +102,6 @@ class EveryReduceOperator extends TerminalOperator<BlockModel, boolean> {
     }
 
 }
-
 
 function everyReduce(reducer: BiFunction<BlockModel, BlockModel, boolean>): Operator<BlockModel, boolean> {
     return new EveryReduceOperator(reducer);
