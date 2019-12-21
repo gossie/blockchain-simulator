@@ -23,6 +23,7 @@ const Blockchain: React.FC<BlockchainProps> = (props: BlockchainProps) => {
     
     return (
         <div className="blockchain">
+            <h2 className="title">Blockchain</h2>
             {blocks}
         </div>
     );
