@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useState, useEffect } from 'react';
 import './App.css';
 import Miner from './Miner';
 import TransactionForm from './TransactionForm';
@@ -8,8 +8,12 @@ import MinerModel from './model/miner-model';
 
 const App: React.FC = () => {
     
-    const blockchain: BlockchainModel = new BlockchainModel();
-    const miner: MinerModel = new MinerModel(blockchain);    
+    const [blockchain, setBlockchain] = useState(new BlockchainModel());
+    const [miner, setMiner] = useState(new MinerModel(blockchain));
+
+    useEffect(() => {
+        return () => miner.tearDown();
+    });
     
     return (
         <div className="tile is-ancestor">

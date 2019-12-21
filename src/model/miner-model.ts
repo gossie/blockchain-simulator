@@ -45,6 +45,13 @@ export default class MinerModel {
         this._miningSubscription?.unsubscribe();
     }
 
+    public tearDown(): void {
+        if (this._miningSubscription) {
+            this._miningSubscription.unsubscribe();
+        }
+        this._blockSubscription.unsubscribe();
+    }
+
     private mine(): void {
         this._proofOfWorkSubject.next(`Currently checking ${this._proofOfWork}`);
 
