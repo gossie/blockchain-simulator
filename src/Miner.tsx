@@ -26,6 +26,7 @@ const Miner: React.FC<MinerProps> = (props: MinerProps) => {
 
     return (
         <div>
+            <h2 className="title">Miner</h2>
             <div>
                 {message} {proofOfWork}
             </div>
