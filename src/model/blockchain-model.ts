@@ -73,7 +73,7 @@ interface BiFunction<A, B, C> {
 
 class EveryReduceOperator extends TerminalOperator<BlockModel, boolean> {
 
-    private _lastBlock: BlockModel;
+    private _lastBlock: BlockModel | undefined = undefined;
 
     constructor(private reducer: BiFunction<BlockModel, BlockModel, boolean>) {
         super();

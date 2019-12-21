@@ -14,6 +14,7 @@ export default class MinerModel {
     private _proofOfWork = 0;
 
     constructor(private  _blockchain: BlockchainModel) {
+        this._top = _blockchain.top;
         this._subscriptions.push(_blockchain.observeNewBlock()
             .subscribe((block: BlockModel) => {
                 this._top = block;
