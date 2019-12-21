@@ -43,7 +43,7 @@ export default class MinerModel {
         const aHash: string = createHash('sha256')
             .update(`${this._top.proofOfWork}${this._proofOfWork}${this._top.hash}`)
             .digest('hex');
-        if (aHash.startsWith('00')) {
+        if (aHash.startsWith(BlockchainModel.PROOF_OF_WORK_CONSTRAINT)) {
             this._proofOfWorkSubject.next(`Wohoo! ${this._proofOfWork} worked. I am creating a new block.`);
             this._blockchain.addBlock(this._proofOfWork);
         } else {

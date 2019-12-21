@@ -13,18 +13,15 @@ const App: React.FC = () => {
     
     return (
         <div className="tile is-ancestor">
-            <div className="tile is-vertical">
+            <div className="tile">
                 <div className="tile is-parent">
                     <div className="tile is-child box">
                         <TransactionForm blockchain={blockchain} />
                     </div>
+                </div>
+                <div className="tile is-parent is-vertical">
                     <div className="tile is-child box">
                         <Miner miner={miner} />
-                    </div>
-                </div>
-                <div className="tile is-parent">
-                    <div className="tile is-child box">
-                        
                     </div>
                     <div className="tile is-child box">
                         <Blockchain blockchain={blockchain} />

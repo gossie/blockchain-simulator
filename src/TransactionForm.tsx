@@ -12,7 +12,7 @@ const TransactionForm: React.FC<TransactionFormProps> = (props: TransactionFormP
     const [from, setFrom] = useState('');
     const [to, setTo] = useState('');
     const [amount, setAmount] = useState(1);
-    const [openTransactions, setOpenTransactions] = useState([]);
+    const [openTransactions, setOpenTransactions] = useState([...props.blockchain.openTransactions]);
 
     const onAmountChange = (event: ChangeEvent<HTMLInputElement>) => {
         const value: number = parseInt(event.target.value);
@@ -30,7 +30,7 @@ const TransactionForm: React.FC<TransactionFormProps> = (props: TransactionFormP
     };
 
     useEffect(() => {
-        const subscription: Subscription = props.blockchain.observeNewBlock().subscribe(() => setOpenTransactions([]));
+        const subscription: Subscription = props.blockchain.observeNewBlock().subscribe(() => setOpenTransactions([...props.blockchain.openTransactions]));
         return () => subscription.unsubscribe();
     }, [props.blockchain]);
 
@@ -40,13 +40,18 @@ const TransactionForm: React.FC<TransactionFormProps> = (props: TransactionFormP
     return (
         <div>
             <div>
-                <h2>New transaction</h2>
+                <h2 className="title">Transactions</h2>
                 Transfer <input data-testid="amount" className="input" type="text" value={amount} onChange={onAmountChange} /> 
                 from <input data-testid="from" className="input" type="text" value={from} onChange={event => setFrom(event.target.value)} /> 
                 to <input data-testid="to" className="input" type="text" value={to} onChange={event => setTo(event.target.value)} />
                 <button data-testid="add" className="button is-link" onClick={addTransaction}>Add</button>
             </div>
-            {transactions}
+            <div>
+                Currently there are {transactions.length} open transactions.
+            </div>
+            <div>
+                {transactions}
+            </div>
         </div>
     );
 };

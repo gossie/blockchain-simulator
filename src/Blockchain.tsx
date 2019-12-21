@@ -11,16 +11,12 @@ interface BlockchainProps {
 
 const Blockchain: React.FC<BlockchainProps> = (props: BlockchainProps) => {
 
-    const [blocks, setBlocks] = useState(props.blockchain.blocks
-        .map((block: BlockModel, index: number) => <Block key={index} block={block} />)
-        .reverse());
+    const mapBlocks = (b: Array<BlockModel>) => b.map((block: BlockModel, index: number) => <Block key={index} block={block} />).reverse();
+
+    const [blocks, setBlocks] = useState(mapBlocks(props.blockchain.blocks));
 
     useEffect(() => {
-        const subscription: Subscription = props.blockchain.observeNewBlock().subscribe(() => {
-            setBlocks(props.blockchain.blocks
-                .map((block: BlockModel, index: number) => <Block key={index} block={block} />)
-                .reverse());
-        });
+        const subscription: Subscription = props.blockchain.observeNewBlock().subscribe(() => setBlocks(mapBlocks(props.blockchain.blocks)));
         return () => subscription.unsubscribe();
     }, [props.blockchain]);
 

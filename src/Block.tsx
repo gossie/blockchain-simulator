@@ -10,14 +10,14 @@ interface BlockProps {
 
 const Block: React.FC<BlockProps> = (props: BlockProps) => {
     const transactions = props.block.transactions
-        .map((transaction: TransactionModel) => `${transaction.amount} from ${transaction.from} to ${transaction.to}`)
+        .map((transaction: TransactionModel) => `Transfered ${transaction.amount} from ${transaction.from} to ${transaction.to}`)
         .join(', ');
     return (
         <div className="block box">
-            Transactions: {transactions}<br />
-            Previous hash: {props.block.previousHash}<br />
-            Hash: {props.block.hash}<br />
-            Proof of work: {props.block.proofOfWork}
+            <b>Transactions:</b> {transactions}<br />
+            <b>Previous hash:</b> {props.block.previousHash}<br />
+            <b>Hash:</b> {props.block.hash}<br />
+            <b>Proof of work:</b> {props.block.proofOfWork}
         </div>
     );
 };
