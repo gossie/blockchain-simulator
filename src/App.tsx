@@ -20,7 +20,9 @@ const App: React.FC = () => {
             <div className="tile is-vertical">
                 <div className="tile is-parent">
                     <div className="tile is-child box">
-                        This is a simple blockchain simulator. It consists only of one miner that tries to find find blocks.
+                        <p>
+                            This is a simple blockchain simulator. It consists only of one miner that tries to find find blocks.
+                        </p>
                     </div>
                 </div>
                 <div className="tile">
