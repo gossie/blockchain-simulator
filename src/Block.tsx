@@ -11,7 +11,7 @@ interface BlockProps {
 const Block: React.FC<BlockProps> = (props: BlockProps) => {
     const transactions = props.block.transactions
         .map((transaction: TransactionModel) => `Transfered ${transaction.amount} from ${transaction.from} to ${transaction.to}`)
-        .map((s: string) => <li>{s}</li>);
+        .map((s: string, index: number) => <li key={index}>{s}</li>);
     return (
         <div className="block box">
             { transactions.length > 0 && <div><b>Transactions:</b> <ul>{transactions}</ul></div> }

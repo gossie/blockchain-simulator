@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from 'react';
+import React, { useEffect } from 'react';
 import './App.css';
 import Miner from './Miner';
 import TransactionForm from './TransactionForm';
@@ -8,8 +8,8 @@ import MinerModel from './model/miner-model';
 
 const App: React.FC = () => {
     
-    const [blockchain, setBlockchain] = useState(new BlockchainModel());
-    const [miner, setMiner] = useState(new MinerModel(blockchain));
+    const blockchain: BlockchainModel = new BlockchainModel();
+    const miner: MinerModel = new MinerModel(blockchain);
 
     useEffect(() => {
         return () => miner.tearDown();
@@ -21,7 +21,8 @@ const App: React.FC = () => {
                 <div className="tile is-parent">
                     <div className="tile is-child box">
                         <p>
-                            This is a simple blockchain simulator. It consists only of one miner that tries to find find blocks.
+                            This is a simple blockchain simulator. It consists only of one miner that tries to find find blocks. It is trying to find a prrof of work that fulfills this constraint:<br />
+                            <code>hash(proofOfWorkToCheck + lastProofOfWork + lastHash).startsWith('00')</code>
                         </p>
                     </div>
                 </div>

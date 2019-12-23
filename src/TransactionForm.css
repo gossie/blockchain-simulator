@@ -1,3 +1,8 @@
 .transaction-form {
     vertical-align: middle;
+    display: none;
+}
+
+.row {
+    margin-bottom: 0.5rem;
 }
