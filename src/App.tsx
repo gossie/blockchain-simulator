@@ -21,7 +21,7 @@ const App: React.FC = () => {
                 <div className="tile is-parent">
                     <div className="tile is-child box">
                         <p>
-                            This is a simple blockchain simulator. It consists only of one miner that tries to find find blocks. It is trying to find a prrof of work that fulfills this constraint:<br />
+                            After reading Daniel van Flymen's article on <a href="https://hackernoon.com/learn-blockchains-by-building-one-117428612f46" target="_blank" rel="noopener noreferrer">learning blockchains by building one</a>, I wrote this blockchain simulator. It consists of only one miner that tries to find find blocks. The miner is trying to find a prrof of work that fulfills this constraint:<br />
                             <code>hash(proofOfWorkToCheck + lastProofOfWork + lastHash).startsWith('00')</code>
                         </p>
                     </div>
