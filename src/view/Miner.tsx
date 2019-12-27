@@ -4,6 +4,7 @@ import { Subscription } from 'rxjs';
 import './Miner.css';
 
 interface MinerProps {
+    index: number;
     miner: MinerModel;
 }
 
@@ -34,7 +35,7 @@ const Miner: React.FC<MinerProps> = (props: MinerProps) => {
 
     return (
         <div className="miner">
-            <h2 className="title">Miner</h2>
+            <h2 className="title">Miner {props.index}</h2>
             <div>
                 {message} {proofOfWork}
             </div>
