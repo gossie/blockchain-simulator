@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from 'react';
-import MinerModel from './model/miner-model';
+import MinerModel from '../model/miner-model';
 import { Subscription } from 'rxjs';
 import './Miner.css';
 
@@ -11,8 +11,12 @@ const Miner: React.FC<MinerProps> = (props: MinerProps) => {
     const [message, setMessage] = useState('I am waiting!');
     const [proofOfWork, setProofOfWork] = useState('');
     const [mining, setMining] = useState(false);
+    const [amount, setAmount] = useState(props.miner.amount);
     useEffect(() => {
-        const subscription: Subscription = props.miner.observeProofOfWorkSearch().subscribe((current: string) => setProofOfWork(current));
+        const subscription: Subscription = props.miner.observeProofOfWorkSearch().subscribe((current: string) => {
+            setProofOfWork(current);
+            setAmount(props.miner.amount);
+        });
         return () => subscription.unsubscribe();
     });
 
@@ -33,6 +37,9 @@ const Miner: React.FC<MinerProps> = (props: MinerProps) => {
             <h2 className="title">Miner</h2>
             <div>
                 {message} {proofOfWork}
+            </div>
+            <div>
+                Mined {amount} blocks.
             </div>
             <div>
                 <button className={"button is-link " + (mining ? 'is-loading' : '')} onClick={startMining}>Start</button>

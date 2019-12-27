@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from 'react';
 import Block from './Block';
-import BlockchainModel from './model/blockchain-model';
-import BlockModel from './model/block-model';
+import BlockchainModel from '../model/blockchain-model';
+import BlockModel from '../model/block-model';
 import { Subscription } from 'rxjs';
 import './Blockchain.css';
 

@@ -1,8 +1,8 @@
 import React from 'react';
 import { render, fireEvent } from '@testing-library/react';
 import TransactionForm from './TransactionForm';
-import TransactionModel from './model/transaction-model';
-import BlockchainModel from './model/blockchain-model';
+import TransactionModel from '../model/transaction-model';
+import BlockchainModel from '../model/blockchain-model';
 
 test('that transactions are added', () => {
     const blockchain = new BlockchainModel();

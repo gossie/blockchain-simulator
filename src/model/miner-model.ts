@@ -13,14 +13,21 @@ export default class MinerModel {
     private _blockSubscription: Subscription;
     private _top: BlockModel;
     private _proofOfWork = 0;
+    private _miningIncrementor = 1;
+    private _delay = false;
+    private _amount = 0;
 
     constructor(private  _blockchain: BlockchainModel) {
+        console.debug('Miner is created');
         this._top = _blockchain.top;
         this._blockSubscription = _blockchain.observeNewBlock()
             .subscribe((block: BlockModel) => {
                 this._top = block;
-                this._proofOfWork = 0;
             });
+    }
+
+    public get amount(): number {
+        return this._amount;
     }
 
     public observeProofOfWorkSearch(): Observable<string> {
@@ -30,13 +37,7 @@ export default class MinerModel {
     public startMining(): void {
         this._miningSubscription = interval(MinerModel.MINING_TIMEOUT)
             .pipe(
-                delayWhen(() => {
-                    if (this._proofOfWork === 0) {
-                        return timer(3000);
-                    } else {
-                        return timer(0);
-                    }
-                })
+                delayWhen(() => this._delay ? timer(3000) : timer(0))
             )
             .subscribe(() => this.mine());
     }
@@ -53,16 +54,26 @@ export default class MinerModel {
     }
 
     private mine(): void {
+        this._delay = false;
         this._proofOfWorkSubject.next(`Currently checking ${this._proofOfWork}`);
 
         const aHash: string = createHash('sha256')
             .update(`${this._top.proofOfWork}${this._proofOfWork}${this._top.hash}`)
             .digest('hex');
         if (aHash.startsWith(BlockchainModel.PROOF_OF_WORK_CONSTRAINT)) {
-            this._proofOfWorkSubject.next(`Wohoo! ${this._proofOfWork} worked. I am creating a new block.`);
-            this._blockchain.addBlock(this._proofOfWork);
+            try {
+                this._blockchain.addBlock(this._proofOfWork);
+                this._proofOfWorkSubject.next(`Wohoo! ${this._proofOfWork} worked. I am creating a new block.`);
+                this._proofOfWork = 0;
+                this._miningIncrementor *= -1;
+                ++this._amount;
+            } catch (e) {
+                this._proofOfWorkSubject.next(e.message);
+                this._proofOfWork += this._miningIncrementor;
+            }
+            this._delay = true;
         } else {
-            ++this._proofOfWork;
+            this._proofOfWork += this._miningIncrementor;
         }
     }
 

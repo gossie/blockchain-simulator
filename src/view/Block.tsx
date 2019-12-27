@@ -1,7 +1,7 @@
 import React from 'react';
 import './Block.css';
-import BlockModel from './model/block-model';
-import TransactionModel from './model/transaction-model';
+import BlockModel from '../model/block-model';
+import TransactionModel from '../model/transaction-model';
 
 
 interface BlockProps {

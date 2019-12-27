@@ -41,22 +41,21 @@ export default class BlockchainModel {
     }
 
     public addBlock(proofOfWork: number): void {
-        console.debug('blockchain received a new proof of work', proofOfWork);
         const newBlock = new BlockModel(this._openTransactions.splice(0, BlockchainModel.MAX_BLOCK_SIZE), this.top.hash, proofOfWork);
-        console.debug('blockchain created a new block', newBlock);
         this._blocks.push(newBlock);
 
         const blockchainConsistent: boolean = this._blocks.pipe(
             everyReduce((b1: BlockModel, b2: BlockModel) => this.checkBlocks(b1, b2))
         )
-        console.debug('blockchain was checked for consistency', blockchainConsistent);
 
         if (blockchainConsistent) {
-            console.debug('blockchain propagates block');
-            this._blockSubject.next(newBlock);
+            window.setTimeout(() => this._blockSubject.next(newBlock), 5000);
         } else {
-            console.debug('blockchain removes block');
-            this._blocks.pop();
+            const falseBlock = this._blocks.pop();
+            if (falseBlock) {
+                this._openTransactions.unshift(falseBlock.transactions[0], falseBlock.transactions[1], falseBlock.transactions[2], falseBlock.transactions[3], falseBlock.transactions[4])
+                throw new Error(`Block was not added. Proof of work ${proofOfWork} does not fullfill constraint.`);
+            }
         }
     }
 

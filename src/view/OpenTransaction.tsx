@@ -1,5 +1,5 @@
 import React from 'react';
-import TransactionModel from './model/transaction-model';
+import TransactionModel from '../model/transaction-model';
 
 interface TransactionProps {
     transaction: TransactionModel;

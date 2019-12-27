@@ -1,7 +1,7 @@
 import React, { useState, ChangeEvent, useEffect } from 'react';
 import OpenTransaction from './OpenTransaction';
-import BlockchainModel from './model/blockchain-model';
-import TransactionModel from './model/transaction-model';
+import BlockchainModel from '../model/blockchain-model';
+import TransactionModel from '../model/transaction-model';
 import { Subscription } from 'rxjs';
 
 import './TransactionForm.css'

@@ -1,7 +1,7 @@
 import React from 'react';
 import { render } from '@testing-library/react';
 import DoneTransaction from './DoneTransaction';
-import TransactionModel from './model/transaction-model';
+import TransactionModel from '../model/transaction-model';
 
 test('that done transaction is displayed', () => {
     const { getByText } = render(<DoneTransaction transaction={new TransactionModel('a', 'b', 4)} />);
