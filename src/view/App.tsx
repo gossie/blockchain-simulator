@@ -44,13 +44,13 @@ const App: React.FC = () => {
                     <div className="tile is-parent is-vertical">
                         <div className="tile is-parent box">
                             <div className="tile is-child">
-                                <Miner miner={miner1} />
+                                <Miner miner={miner1} index="1" />
                             </div>
                             <div className="tile is-child">
-                                <Miner miner={miner2} />
+                                <Miner miner={miner2} index="2" />
                             </div>
                             <div className="tile is-child">
-                                <Miner miner={miner3} />
+                                <Miner miner={miner3} index="3" />
                             </div>
                         </div>
                         <div className="tile is-child box">
