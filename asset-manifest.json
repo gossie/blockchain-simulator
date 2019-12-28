@@ -1,0 +1,25 @@
+{
+  "files": {
+    "main.css": "/blockchain-simulator/static/css/main.31a5919b.chunk.css",
+    "main.js": "/blockchain-simulator/static/js/main.e9b52bf8.chunk.js",
+    "main.js.map": "/blockchain-simulator/static/js/main.e9b52bf8.chunk.js.map",
+    "runtime-main.js": "/blockchain-simulator/static/js/runtime-main.9eecd257.js",
+    "runtime-main.js.map": "/blockchain-simulator/static/js/runtime-main.9eecd257.js.map",
+    "static/css/2.d2e2750e.chunk.css": "/blockchain-simulator/static/css/2.d2e2750e.chunk.css",
+    "static/js/2.5ef2ac60.chunk.js": "/blockchain-simulator/static/js/2.5ef2ac60.chunk.js",
+    "static/js/2.5ef2ac60.chunk.js.map": "/blockchain-simulator/static/js/2.5ef2ac60.chunk.js.map",
+    "index.html": "/blockchain-simulator/index.html",
+    "precache-manifest.07c6dc72c3f69b5b38f79603687f1eaa.js": "/blockchain-simulator/precache-manifest.07c6dc72c3f69b5b38f79603687f1eaa.js",
+    "service-worker.js": "/blockchain-simulator/service-worker.js",
+    "static/css/2.d2e2750e.chunk.css.map": "/blockchain-simulator/static/css/2.d2e2750e.chunk.css.map",
+    "static/css/main.31a5919b.chunk.css.map": "/blockchain-simulator/static/css/main.31a5919b.chunk.css.map",
+    "static/js/2.5ef2ac60.chunk.js.LICENSE": "/blockchain-simulator/static/js/2.5ef2ac60.chunk.js.LICENSE"
+  },
+  "entrypoints": [
+    "static/js/runtime-main.9eecd257.js",
+    "static/css/2.d2e2750e.chunk.css",
+    "static/js/2.5ef2ac60.chunk.js",
+    "static/css/main.31a5919b.chunk.css",
+    "static/js/main.e9b52bf8.chunk.js"
+  ]
+}
