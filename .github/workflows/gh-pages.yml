@@ -21,3 +21,4 @@ jobs:
           GITHUB_TOKEN: ${{ secrets.BLOCKCHAIN_SIMULATOR_GITHUB_TOKEN }}
           BRANCH: gh-pages
           FOLDER: build
+          CLEAN: true
