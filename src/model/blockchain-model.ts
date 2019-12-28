@@ -53,7 +53,14 @@ export default class BlockchainModel {
         } else {
             const falseBlock = this._blocks.pop();
             if (falseBlock) {
-                this._openTransactions.unshift(falseBlock.transactions[0], falseBlock.transactions[1], falseBlock.transactions[2], falseBlock.transactions[3], falseBlock.transactions[4])
+                switch (falseBlock.transactions.length) {
+                    case 1: this._openTransactions.unshift(falseBlock.transactions[0]); break;
+                    case 2: this._openTransactions.unshift(falseBlock.transactions[0], falseBlock.transactions[1]); break;
+                    case 3: this._openTransactions.unshift(falseBlock.transactions[0], falseBlock.transactions[1], falseBlock.transactions[2]); break;
+                    case 4: this._openTransactions.unshift(falseBlock.transactions[0], falseBlock.transactions[1], falseBlock.transactions[2], falseBlock.transactions[3]); break; 
+                    case 5: this._openTransactions.unshift(falseBlock.transactions[0], falseBlock.transactions[1], falseBlock.transactions[2], falseBlock.transactions[3], falseBlock.transactions[4]); break;
+                    default: break;
+                }
                 throw new Error(`Block was not added. Proof of work ${proofOfWork} does not fullfill constraint.`);
             }
         }
