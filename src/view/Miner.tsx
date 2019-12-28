@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from 'react';
-import MinerModel from '../model/miner-model';
 import { Subscription } from 'rxjs';
+import MinerModel from '../model/miner-model';
 import './Miner.css';
 
 interface MinerProps {
