@@ -13,7 +13,8 @@ const Miner: React.FC<MinerProps> = (props: MinerProps) => {
     const [message, setMessage] = useState('I am waiting!');
     const [proofOfWork, setProofOfWork] = useState('');
     const [mining, setMining] = useState(false);
-    const [amount, setAmount] = useState(props.miner.amount);
+    const [minedBlocks, setMinedBlocks] = useState(props.miner.minedBlocks);
+    const [rejectedBlocks, setRejectedBlocks] = useState(props.miner.rejectedBlocks);
     const [cssClass, setCssClass] = useState('has-text-black');
     useEffect(() => {
         const subscription: Subscription = props.miner.observeProofOfWorkSearch().subscribe((current: MinerEvent) => {
@@ -25,13 +26,14 @@ const Miner: React.FC<MinerProps> = (props: MinerProps) => {
                 case EventType.BlockCreated:
                     setProofOfWork(`Wohoo! It worked. I am creating a new block.`);
                     setCssClass('has-text-success');
+                    setMinedBlocks((old: number) => old + 1);
                     break;
                 case EventType.BlockRejected:
                     setProofOfWork(`Block was not added. Proof of work does not fullfill constraint.`);
                     setCssClass('has-text-danger');
+                    setRejectedBlocks((old: number) => old + 1);
                     break;
             }
-            setAmount(props.miner.amount);
         });
         return () => subscription.unsubscribe();
     });
@@ -57,8 +59,11 @@ const Miner: React.FC<MinerProps> = (props: MinerProps) => {
             <div className={cssClass}>
                 {proofOfWork}
             </div>
-            <div>
-                Mined {amount} blocks.
+            <div className="mined">
+                Successfully mined {minedBlocks} blocks.
+            </div>
+            <div className="rejected">
+                {rejectedBlocks} blocks were rejected.
             </div>
             <div>
                 <button className={"button is-link " + (mining ? 'is-loading' : '')} onClick={startMining}>Start</button>

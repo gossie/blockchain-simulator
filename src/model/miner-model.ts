@@ -16,7 +16,8 @@ export default class MinerModel {
     private _proofOfWork = 0;
     private _miningIncrementor = 1;
     private _delay = false;
-    private _amount = 0;
+    private _minedBlocks = 0;
+    private _rejectedBlocks = 0;
 
     constructor(private  _blockchain: BlockchainModel) {
         console.debug('Miner is created');
@@ -27,8 +28,12 @@ export default class MinerModel {
             });
     }
 
-    public get amount(): number {
-        return this._amount;
+    public get minedBlocks(): number {
+        return this._minedBlocks;
+    }
+
+    public get rejectedBlocks(): number {
+        return this._rejectedBlocks;
     }
 
     public observeProofOfWorkSearch(): Observable<MinerEvent> {
@@ -67,10 +72,11 @@ export default class MinerModel {
                 this._proofOfWorkSubject.next(new MinerEvent(EventType.BlockCreated));
                 this._proofOfWork = 0;
                 this._miningIncrementor *= -1;
-                ++this._amount;
+                ++this._minedBlocks;
             } catch (e) {
                 this._proofOfWorkSubject.next(new MinerEvent(EventType.BlockRejected));
                 this._proofOfWork += this._miningIncrementor;
+                ++this._rejectedBlocks;
             }
             this._delay = true;
         } else {
