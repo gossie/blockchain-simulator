@@ -1,6 +1,6 @@
 self.__precacheManifest = (self.__precacheManifest || []).concat([
   {
-    "revision": "0f862a5286e7d7d92ca6bd8da05ade95",
+    "revision": "f2682e10e39146caaf7d519884e4679a",
     "url": "/blockchain-simulator/index.html"
   },
   {
@@ -8,7 +8,7 @@ self.__precacheManifest = (self.__precacheManifest || []).concat([
     "url": "/blockchain-simulator/static/css/2.d2e2750e.chunk.css"
   },
   {
-    "revision": "d3537c03506252d366ef",
+    "revision": "db4c98e2f8119f58dae5",
     "url": "/blockchain-simulator/static/css/main.c80355c7.chunk.css"
   },
   {
@@ -20,8 +20,8 @@ self.__precacheManifest = (self.__precacheManifest || []).concat([
     "url": "/blockchain-simulator/static/js/2.ac4ba328.chunk.js.LICENSE"
   },
   {
-    "revision": "d3537c03506252d366ef",
-    "url": "/blockchain-simulator/static/js/main.3e9b6a23.chunk.js"
+    "revision": "db4c98e2f8119f58dae5",
+    "url": "/blockchain-simulator/static/js/main.c5a99725.chunk.js"
   },
   {
     "revision": "274718a48609be39a12d",
