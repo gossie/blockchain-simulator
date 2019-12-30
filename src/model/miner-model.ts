@@ -3,12 +3,13 @@ import { createHash } from "crypto";
 import BlockModel from './block-model';
 import { Subscription, interval, timer, Subject, Observable } from "rxjs";
 import { delayWhen } from 'rxjs/operators';
+import { MinerEvent, EventType } from "./miner-event";
 
 export default class MinerModel {
 
     private static readonly MINING_TIMEOUT = 50;
 
-    private _proofOfWorkSubject: Subject<string> = new Subject();
+    private _proofOfWorkSubject: Subject<MinerEvent> = new Subject();
     private _miningSubscription: Subscription | undefined = undefined;
     private _blockSubscription: Subscription;
     private _top: BlockModel;
@@ -30,7 +31,7 @@ export default class MinerModel {
         return this._amount;
     }
 
-    public observeProofOfWorkSearch(): Observable<string> {
+    public observeProofOfWorkSearch(): Observable<MinerEvent> {
         return this._proofOfWorkSubject.asObservable();
     }
 
@@ -55,7 +56,7 @@ export default class MinerModel {
 
     private mine(): void {
         this._delay = false;
-        this._proofOfWorkSubject.next(`Currently checking ${this._proofOfWork}`);
+        this._proofOfWorkSubject.next(new MinerEvent(EventType.CheckingBlock, this._proofOfWork));
 
         const aHash: string = createHash('sha256')
             .update(`${this._top.proofOfWork}${this._proofOfWork}${this._top.hash}`)
@@ -63,12 +64,12 @@ export default class MinerModel {
         if (aHash.startsWith(BlockchainModel.PROOF_OF_WORK_CONSTRAINT)) {
             try {
                 this._blockchain.addBlock(this._proofOfWork);
-                this._proofOfWorkSubject.next(`Wohoo! ${this._proofOfWork} worked. I am creating a new block.`);
+                this._proofOfWorkSubject.next(new MinerEvent(EventType.BlockCreated));
                 this._proofOfWork = 0;
                 this._miningIncrementor *= -1;
                 ++this._amount;
             } catch (e) {
-                this._proofOfWorkSubject.next(e.message);
+                this._proofOfWorkSubject.next(new MinerEvent(EventType.BlockRejected));
                 this._proofOfWork += this._miningIncrementor;
             }
             this._delay = true;
