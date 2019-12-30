@@ -60,7 +60,7 @@ const Miner: React.FC<MinerProps> = (props: MinerProps) => {
                 {proofOfWork}
             </div>
             <div className="mined">
-                Successfully mined {minedBlocks} blocks.
+                {minedBlocks} blocks were successfully mined.
             </div>
             <div className="rejected">
                 {rejectedBlocks} blocks were rejected.

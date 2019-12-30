@@ -15,7 +15,7 @@ const Block: React.FC<BlockProps> = (props: BlockProps) => {
     return (
         <div className="block box">
             { transactions.length > 0 && <div><b>Transactions:</b> <ul>{transactions}</ul></div> }
-            <b>Proof of work:</b> {props.block.proofOfWork}
+            <b>Proof of work:</b> {props.block.proofOfWork}<br />
             <b>Hash:</b> {props.block.hash}<br />
             { props.block.previousHash.length > 0 && <div><b>Previous hash:</b> {props.block.previousHash}</div> }
         </div>
