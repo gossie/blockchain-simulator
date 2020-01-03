@@ -1,9 +1,9 @@
 import { Subject, BehaviorSubject, Observable } from 'rxjs';
+import { Operator, TerminalOperator, OperatorResult } from '@gossie/array-pipe/operators';
+import { createHash } from 'crypto';
 import '@gossie/array-pipe';
 import BlockModel from './block-model';
 import TransactionModel from './transaction-model';
-import { Operator, TerminalOperator, OperatorResult } from '@gossie/array-pipe/operators';
-import { createHash } from 'crypto';
 
 export default class BlockchainModel {
 
