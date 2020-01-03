@@ -1,25 +1,25 @@
 {
   "files": {
     "main.css": "/blockchain-simulator/static/css/main.c80355c7.chunk.css",
-    "main.js": "/blockchain-simulator/static/js/main.c5a99725.chunk.js",
-    "main.js.map": "/blockchain-simulator/static/js/main.c5a99725.chunk.js.map",
-    "runtime-main.js": "/blockchain-simulator/static/js/runtime-main.9eecd257.js",
-    "runtime-main.js.map": "/blockchain-simulator/static/js/runtime-main.9eecd257.js.map",
-    "static/css/2.d2e2750e.chunk.css": "/blockchain-simulator/static/css/2.d2e2750e.chunk.css",
-    "static/js/2.ac4ba328.chunk.js": "/blockchain-simulator/static/js/2.ac4ba328.chunk.js",
-    "static/js/2.ac4ba328.chunk.js.map": "/blockchain-simulator/static/js/2.ac4ba328.chunk.js.map",
+    "main.js": "/blockchain-simulator/static/js/main.e96c2778.chunk.js",
+    "main.js.map": "/blockchain-simulator/static/js/main.e96c2778.chunk.js.map",
+    "runtime-main.js": "/blockchain-simulator/static/js/runtime-main.6fd4e857.js",
+    "runtime-main.js.map": "/blockchain-simulator/static/js/runtime-main.6fd4e857.js.map",
+    "static/css/2.1d10ae30.chunk.css": "/blockchain-simulator/static/css/2.1d10ae30.chunk.css",
+    "static/js/2.686ba37f.chunk.js": "/blockchain-simulator/static/js/2.686ba37f.chunk.js",
+    "static/js/2.686ba37f.chunk.js.map": "/blockchain-simulator/static/js/2.686ba37f.chunk.js.map",
     "index.html": "/blockchain-simulator/index.html",
-    "precache-manifest.41c0d412ae0ea7114bff2a28982d3bfe.js": "/blockchain-simulator/precache-manifest.41c0d412ae0ea7114bff2a28982d3bfe.js",
+    "precache-manifest.d4bc9f52985bdcb47bdc2f7e5a89a106.js": "/blockchain-simulator/precache-manifest.d4bc9f52985bdcb47bdc2f7e5a89a106.js",
     "service-worker.js": "/blockchain-simulator/service-worker.js",
-    "static/css/2.d2e2750e.chunk.css.map": "/blockchain-simulator/static/css/2.d2e2750e.chunk.css.map",
+    "static/css/2.1d10ae30.chunk.css.map": "/blockchain-simulator/static/css/2.1d10ae30.chunk.css.map",
     "static/css/main.c80355c7.chunk.css.map": "/blockchain-simulator/static/css/main.c80355c7.chunk.css.map",
-    "static/js/2.ac4ba328.chunk.js.LICENSE": "/blockchain-simulator/static/js/2.ac4ba328.chunk.js.LICENSE"
+    "static/js/2.686ba37f.chunk.js.LICENSE": "/blockchain-simulator/static/js/2.686ba37f.chunk.js.LICENSE"
   },
   "entrypoints": [
-    "static/js/runtime-main.9eecd257.js",
-    "static/css/2.d2e2750e.chunk.css",
-    "static/js/2.ac4ba328.chunk.js",
+    "static/js/runtime-main.6fd4e857.js",
+    "static/css/2.1d10ae30.chunk.css",
+    "static/js/2.686ba37f.chunk.js",
     "static/css/main.c80355c7.chunk.css",
-    "static/js/main.c5a99725.chunk.js"
+    "static/js/main.e96c2778.chunk.js"
   ]
 }
